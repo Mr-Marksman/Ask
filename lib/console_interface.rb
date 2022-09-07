@@ -1,8 +1,7 @@
 class ConsoleInterface
   FIGURES =
-      Dir["#{__dir__}/../data/figures/*.txt"].
-      sort.
-      map { |file_name| File.read(file_name) }
+    Dir["#{__dir__}/../data/figures/*.txt"].sort.
+    map { |file_name| File.read(file_name) }
 
   def initialize(game)
     @game = game
@@ -10,10 +9,10 @@ class ConsoleInterface
 
   def print_out
     puts <<~END
-      Слово: #{word_to_show}
-      #{figure}
-      Ошибки (#{@game.errors_made}): #{errors_to_show}
-      У вас осталось ошибок: #{@game.errors_allowed}
+      Слово: #{word_to_show.colorize(:color => :blue)}
+      #{figure.colorize(:color => :yellow)}
+      Ошибки (#{@game.errors_made}): #{errors_to_show.to_s.colorize(:color => :red)}
+      У вас осталось ошибок: #{@game.errors_allowed.to_s.colorize(:color => :red)}
 
     END
 

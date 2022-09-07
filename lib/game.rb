@@ -7,7 +7,7 @@ class Game
   end
 
   def errors
-    @user_guesses - normalize_letters(@letters)
+    @user_guesses - normalize_letters
   end
 
   def errors_made
@@ -45,12 +45,15 @@ class Game
   end
 
   def won?
-    (normalize_letters(@letters) - @user_guesses).empty?
+    (normalize_letters - @user_guesses).empty?
   end
 
   def word
     @letters.join
   end
+
+  private
+
   def normalize_letter(letter)
     if letter == "Ё"
       "Е"
@@ -61,7 +64,7 @@ class Game
     end
   end
 
-  def normalize_letters(letters)
-    letters.map { |letter| normalize_letter(letter) }
+  def normalize_letters
+    @letters.map { |letter| normalize_letter(letter) }
   end
 end
